@@ -7,6 +7,7 @@ authors = ["Sarma Krovi <sarmakdvsr@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 kafka-python = "^2.0.2"
+confluent-kafka = "^1.6.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
