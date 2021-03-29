@@ -32,6 +32,12 @@ The following command builds the project:
 
 ## Run Driver
 
+The pre-requisite to running the driver and consumer is to start kafka and zookeeper processes. 
+
+This can be done by executing the following command in the parent directory:
+
+    $ sh start.sh
+
 The following command opens the Poetry shell in a virtual environment that has all the dependencies instaled
 
     $ poetry shell
@@ -46,3 +52,9 @@ The following command inside the poetry shell starts the consumer program
 
 
 Partition numbers start with *0* to *n-1* for *n* partitions.
+
+**Note:**
+
+Make sure to stop the Kafka and Zookeeper services once done using the following command:
+
+    $ sh stop.sh
