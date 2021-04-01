@@ -38,17 +38,13 @@ This can be done by executing the following command in the parent directory:
 
     $ sh start.sh
 
-The following command opens the Poetry shell in a virtual environment that has all the dependencies instaled
-
-    $ poetry shell
-
 The following command inside the poetry shell starts the driver program
 
-    $ python3 driver.py -d <location of dataset> -t topic -p partition_count
+    $ poetry run python3 driver.py -d <location of dataset> -t topic -p partition_count
 
 The following command inside the poetry shell starts the consumer program
 
-    $ python3 consumer.py -g <group-id> -t topic -p partition_number
+    $ poetry run python3 consumer.py -g <group-id> -t topic -p partition_number
 
 
 Partition numbers start with *0* to *n-1* for *n* partitions.
