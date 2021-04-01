@@ -28,7 +28,7 @@ Main method
 
 def main():
     parser = argparse.ArgumentParser(description="Driver to publish CSV dataset")
-    parser.add_argument("-d", "--dataset-location", help="Location of CSV dataset", required=True)
+    parser.add_argument("-d", "--dataset-location", help="Location of dataset", required=True)
     parser.add_argument("-t", "--topic", help="Name of the Kafka topic to publish the records", required=True)
     parser.add_argument("-p", "--partition", type=int, help="Number of partitions", required=True)
     try:
@@ -72,6 +72,7 @@ def publish(dataset, topic, partitions):
     counter = 0
     with open(dataset) as csv_file:
         for line in csv_file:
+            line.strip()
             p.poll(0.2)
             p.produce(topic,
                       value=line.encode('utf-8'),
