@@ -37,7 +37,7 @@ class Model:
         y_pred = self.model.predict_one(x)
         self.metric = self.metric.update(y, y_pred)
         self.model = self.model.learn_one(x, y)
-        print("Accuracy: {0}".format(self.metric))
+        print("Accuracy: {0}, {1}".format(self.metric, self.model))
 
 
 '''
