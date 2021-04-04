@@ -63,8 +63,8 @@ def init_kafka_env(topic_name, partitions):
 def producer_callback(err, msg):
     if err is not None:
         print('Message delivery failed: {}'.format(err))
-    else:
-        print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+    # else:
+    #     print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
 
 def publish(dataset, topic, partitions):
@@ -74,11 +74,13 @@ def publish(dataset, topic, partitions):
         for line in csv_file:
             line.strip()
             p.poll(0.2)
+            counter = counter + 1
+            if counter % 1000 == 0:
+                print("{0} records streamed so far ....".format(counter))
             p.produce(topic,
                       value=line.encode('utf-8'),
                       callback=producer_callback,
                       partition=counter % partitions)
-            counter = counter + 1
     p.flush()
 
 
