@@ -4,6 +4,7 @@ from time import sleep
 from river import compose
 from river import linear_model
 from river import metrics
+from river import optim
 from river import preprocessing
 
 import argparse
@@ -27,7 +28,10 @@ class Args:
 
 class Model:
     def __init__(self):
-        self.model = compose.Pipeline(preprocessing.StandardScaler(), linear_model.LogisticRegression())
+        optimizer = optim.SGD(0.1)
+        self.model = compose.Pipeline(
+            preprocessing.StandardScaler(),
+            linear_model.LogisticRegression(optimizer))
         self.metric = metrics.Accuracy()
 
     def train(self, message):
