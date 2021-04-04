@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+from datetime import datetime
 
 from confluent_kafka import Producer
 from confluent_kafka.admin import AdminClient, NewTopic
@@ -76,7 +77,9 @@ def publish(dataset, topic, partitions):
             p.poll(0.2)
             counter = counter + 1
             if counter % 1000 == 0:
-                print("{0} records streamed so far ....".format(counter))
+                print("[{0}] {1} records streamed so far ....".format(
+                    datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
+                    counter))
             p.produce(topic,
                       value=line.encode('utf-8'),
                       callback=producer_callback,
