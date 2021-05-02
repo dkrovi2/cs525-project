@@ -10,6 +10,7 @@ kafka-python = "^2.0.2"
 confluent-kafka = "^1.6.1"
 river = {git = "https://github.com/online-ml/river.git"}
 sklearn = "^0.0"
+stream-python = "^0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
