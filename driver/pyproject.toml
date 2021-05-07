@@ -8,11 +8,12 @@ authors = ["Sarma Krovi <sarmakdvsr@gmail.com>"]
 python = "^3.7"
 kafka-python = "^2.0.2"
 confluent-kafka = "^1.6.1"
+fastapi = "^0.63.0"
 river = {git = "https://github.com/online-ml/river.git"}
 sklearn = "^0.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^4.6"
+pytest = "^6.2.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

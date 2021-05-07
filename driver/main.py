@@ -9,16 +9,29 @@ from river import optim
 from river import preprocessing
 from river import utils
 from time import sleep
+from fastapi import FastAPI
 
-import argparse
 import json
 import numpy as np
 import sys
 import threading
 
+
+class ApplicationState:
+    def __init__(self):
+        self.publisher = None
+        self.consumers = None
+
+    def set(self, publisher, consumers):
+        self.publisher = publisher
+        self.consumers = consumers
+
+
 # Constants
 bootstrap_servers = '127.0.0.1:9092'
 kafka_conf = {"bootstrap.servers": bootstrap_servers}
+application_state = ApplicationState()
+
 
 
 class SynchronousSGD(optim.Optimizer):
@@ -63,6 +76,7 @@ class TopicConsumer:
         self.group_id = group_id
         self.topic = topic
         self.partition = partition
+        self.stop = False
         print("Started consumer [Group: {0}, Topic: {1}, Partition: {2}".format(group_id, topic, partition))
     
     def consume(self):
@@ -74,7 +88,7 @@ class TopicConsumer:
             consumer.assign([TopicPartition(topic=self.topic,
                                             partition=self.partition)])
             
-            while True:
+            while self.stop is False:
                 msg = consumer.poll(timeout=1.0)
                 if msg is None:
                     sleep(0.2)
@@ -93,6 +107,9 @@ class TopicConsumer:
             # Close down consumer to commit final offsets.
             consumer.close()
 
+    def stop(self):
+        self.stop = True
+
 
 def producer_callback(err, msg):
     if err is not None:
@@ -106,6 +123,8 @@ class TopicPublisher:
         self.topic_name = topic_name
         self.partition_count = partition_count
         self.dataset = dataset
+        self.stop = False
+        self.producer = None
     
     def init_kafka_env(self):
         admin_client = AdminClient(kafka_conf)
@@ -127,22 +146,25 @@ class TopicPublisher:
             print(topics)
     
     def publish(self):
-        p = Producer(kafka_conf)
+        self.producer = Producer(kafka_conf)
         counter = 0
         with open(self.dataset) as csv_file:
             for line in csv_file:
                 line.strip()
-                p.poll(0.2)
+                self.producer.poll(0.2)
                 counter = counter + 1
                 if counter % 1000 == 0:
                     print("[{0}] {1} records streamed so far ....".format(
                         datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
                         counter))
-                p.produce(self.topic_name,
-                          value=line.encode('utf-8'),
-                          callback=producer_callback,
-                          partition=counter % self.partition_count)
-        p.flush()
+                self.producer.produce(self.topic_name,
+                                      value=line.encode('utf-8'),
+                                      callback=producer_callback,
+                                      partition=counter % self.partition_count)
+        self.producer.flush()
+
+    def stop(self):
+        self.stop = True
 
 
 class Args:
@@ -153,47 +175,61 @@ class Args:
         self.group_id = ""
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Driver to publish CSV dataset")
-    parser.add_argument("-d", "--dataset-location", help="Location of dataset", required=True)
-    parser.add_argument("-t", "--topic", help="Name of the Kafka topic to publish the records", required=True)
-    parser.add_argument("-p", "--partition", type=int, help="Number of partitions", required=True)
-    parser.add_argument("-g", "--group-id", help="Group ID of the consumer", required=True)
+def main(topic, partition_count, dataset_location):
     try:
-        args = Args()
-        parser.parse_args(sys.argv[1:], namespace=args)
-        print(json.dumps(args.__dict__))
-        publisher = TopicPublisher(args.topic, args.partition, args.dataset_location)
+        publisher = TopicPublisher(topic, partition_count, dataset_location)
         publisher.init_kafka_env()
         
         t_pub = threading.Thread(target=publisher.publish())
         print("Starting publisher...")
         t_pub.start()
         print("Starting consumers...")
-        
+
+        consumers = []
         t_consumers = []
         # partition numbers start with 0
         mylock = threading.Lock()
         optimizer = SynchronousSGD(0.1, mylock)
         
-        for i in range(0, args.partition):
-            con = TopicConsumer(args.group_id + "-{0}".format(i + 1),
-                                args.topic,
+        for i in range(0, partition_count):
+            con = TopicConsumer("test-group-{0}".format(i + 1),
+                                topic,
                                 i,
                                 optimizer)
             t_con = threading.Thread(target=con.consume)
             print("Starting consumer-{0}...".format(i))
             t_con.start()
             t_consumers.append(t_con)
-        
+            consumers.append(con)
+
+        application_state.set(publisher, consumers)
+
         t_pub.join()
+        print("Publisher completed....")
         for t_con in t_consumers:
             t_con.join()
-    
+
     except Exception as e:
         print(e)
-        parser.print_help()
 
 
-# Start execution with main method
-main()
+app = FastAPI()
+
+
+@app.get("/run/{topic}/{partition_count}/{dataset_location}")
+def run(topic, partition_count, dataset_location):
+    main(topic, partition_count, dataset_location)
+
+
+@app.get("/stop-publisher")
+def stop_publisher():
+    if application_state.publisher is not None:
+        application_state.publisher.stop()
+
+
+@app.get("/stop-consumers")
+def stop_consumers():
+    if application_state.consumers is not None:
+        for consumer in application_state.consumers:
+            consumer.stop()
+
