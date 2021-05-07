@@ -52,7 +52,7 @@ Main method
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Driver to publish CSV dataset")
+    parser = argparse.ArgumentParser(description="Consumer to read data from a partition")
     parser.add_argument("-g", "--group-id", help="Group ID of the consumer", required=True)
     parser.add_argument("-t", "--topic", help="Name of the Kafka topic to consumer the records", required=True)
     parser.add_argument("-p", "--partition", type=int, help="Partition to poll", required=True)
