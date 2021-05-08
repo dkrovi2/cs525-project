@@ -1,4 +1,4 @@
-from driver import __version__
+from examples.publisher import __version__
 
 
 def test_version():

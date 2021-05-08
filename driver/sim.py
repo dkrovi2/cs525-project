@@ -1,9 +1,10 @@
 import argparse
 import json
-import threading
 import sys
 
-from main import TopicPublisher, SynchronousSGD, TopicConsumer
+from driver import ApplicationState
+from driver import start_publisher_and_consumers
+from driver import wait_for_threads_to_join
 
 
 class Args:
@@ -12,6 +13,7 @@ class Args:
         self.partition = 0
         self.topic = ""
         self.dataset_location = ""
+        self.common_optimizer = False
 
 
 def main():
@@ -20,34 +22,18 @@ def main():
     parser.add_argument("-t", "--topic", help="Name of the Kafka topic to publish the records", required=True)
     parser.add_argument("-p", "--partition", type=int, help="Number of partitions", required=True)
     parser.add_argument("-g", "--group-id", help="Group ID of the consumer", required=True)
+    parser.add_argument("-c", "--common-optimizer", help="Flag to set if a common optimizer should be used", required=False, default=False)
     try:
         args = Args()
         parser.parse_args(sys.argv[1:], namespace=args)
         print(json.dumps(args.__dict__))
-        publisher = TopicPublisher(args.topic, args.partition, args.dataset_location)
-        publisher.init_kafka_env()
-
-        t_pub = threading.Thread(target=publisher.publish())
-        print("Starting publisher...")
-        t_pub.start()
-        print("Starting consumers...")
-
-        t_consumers = []
-        mylock = threading.Lock()
-        optimizer = SynchronousSGD(0.1, mylock)
-
-        # partition numbers start with 0
-        for i in range(0, args.partition):
-            con = TopicConsumer(args.group_id + "-{0}".format(i + 1), args.topic, i, optimizer)
-            t_con = threading.Thread(target=con.consume)
-            print("Starting consumer-{0}...".format(i))
-            t_con.start()
-            t_consumers.append(t_con)
-
-        t_pub.join()
-        for t_con in t_consumers:
-            t_con.join()
-
+        application_state = ApplicationState()
+        start_publisher_and_consumers(args.topic,
+                                      args.partition,
+                                      args.dataset_location,
+                                      application_state,
+                                      args.common_optimizer)
+        wait_for_threads_to_join(application_state)
     except Exception as e:
         print(e)
         parser.print_help()
