@@ -33,11 +33,30 @@ def wait_for_threads_to_join(app_state):
         t_con.join()
 
 
+def add_neighbors_for_ring_topology(consumers, partition_count):
+    print("Using ring topology")
+    # Ring topology
+    for i in range(1, partition_count):
+        consumers[i - 1].set_neighbors([consumers[i].model])
+    consumers[partition_count - 1].set_neighbors([consumers[0].model])
+
+
+def add_neighbors_for_fully_connected_topology(consumers, partition_count):
+    print("Using fully-connected topology")
+    # Fully-connected topology
+    for i in range(0, partition_count):
+        neighbors = []
+        for j in range(0, partition_count):
+            if i != j:
+                neighbors.append(consumers[j].model)
+        consumers[i].set_neighbors(neighbors)
+
+
 def start_publisher_and_consumers(topic,
                                   partition_count,
                                   dataset_location,
                                   application_state,
-                                  common_optimizer=False):
+                                  topology=None):
     try:
         publisher = TopicPublisher(topic, partition_count, dataset_location, kafka_conf)
         publisher.init_kafka_env()
@@ -50,28 +69,22 @@ def start_publisher_and_consumers(topic,
         consumers = []
         t_consumers = []
         # partition numbers start with 0
-        mylock = threading.Lock()
-        sync_optimizer = None
-        if common_optimizer:
-            print("Using a common optimizer")
-            sync_optimizer = SynchronousSGD(0.1, mylock)
-        else:
-            print("NOT Using a common optimizer")
 
         for i in range(0, partition_count):
-            optimizer = sync_optimizer
-            if not common_optimizer:
-                optimizer = optim.SGD(0.1)
-            con = TopicConsumer("test-group-{0}".format(i + 1),
-                                topic,
-                                i,
-                                bootstrap_servers,
-                                optimizer)
-            t_con = threading.Thread(target=con.consume)
-            print("Starting consumer-{0}...".format(i))
+            con = TopicConsumer("test-group-{0}".format(i + 1), topic, i, bootstrap_servers)
+            consumers.append(con)
+
+        if topology == "ring":
+            add_neighbors_for_ring_topology(consumers, partition_count)
+        elif topology == "fcg":
+            add_neighbors_for_fully_connected_topology(consumers, partition_count)
+        else:
+            print("No topology configured")
+
+        for i in range(0, partition_count):
+            t_con = threading.Thread(target=consumers[i].consume)
             t_con.start()
             t_consumers.append(t_con)
-            consumers.append(con)
 
         application_state.set(publisher, consumers, t_pub, t_consumers)
 

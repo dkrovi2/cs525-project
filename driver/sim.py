@@ -13,7 +13,7 @@ class Args:
         self.partition = 0
         self.topic = ""
         self.dataset_location = ""
-        self.common_optimizer = False
+        self.graph_type = None
 
 
 def main():
@@ -21,8 +21,7 @@ def main():
     parser.add_argument("-d", "--dataset-location", help="Location of dataset", required=True)
     parser.add_argument("-t", "--topic", help="Name of the Kafka topic to publish the records", required=True)
     parser.add_argument("-p", "--partition", type=int, help="Number of partitions", required=True)
-    parser.add_argument("-g", "--group-id", help="Group ID of the consumer", required=True)
-    parser.add_argument("-c", "--common-optimizer", help="Flag to set if a common optimizer should be used", required=False, default=False)
+    parser.add_argument("-g", "--graph-type", help="Graph topology to use, one of [ring, fcg[", required=False)
     try:
         args = Args()
         parser.parse_args(sys.argv[1:], namespace=args)
@@ -32,7 +31,7 @@ def main():
                                       args.partition,
                                       args.dataset_location,
                                       application_state,
-                                      args.common_optimizer)
+                                      args.graph_type)
         wait_for_threads_to_join(application_state)
     except Exception as e:
         print(e)

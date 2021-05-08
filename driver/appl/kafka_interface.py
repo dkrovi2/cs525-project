@@ -9,13 +9,16 @@ import sys
 
 
 class TopicConsumer:
-    def __init__(self, group_id, topic, partition, bootstrap_servers, optimizer):
-        self.model = OnlineModel(optimizer)
+    def __init__(self, group_id, topic, partition, bootstrap_servers):
+        self.model = OnlineModel()
         self.group_id = group_id
         self.topic = topic
         self.partition = partition
         self.bootstrap_servers = bootstrap_servers
         self.stop = False
+
+    def set_neighbors(self, neighbors):
+        self.model.set_neighbors(neighbors)
 
     def consume(self):
         consumer_kafka_conf = {"bootstrap.servers": self.bootstrap_servers,
