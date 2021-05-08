@@ -1,12 +1,11 @@
-from river import optim
-
-from dol_optim.sync_sgd import SynchronousSGD
 from appl.kafka_interface import TopicConsumer, TopicPublisher
 
 import sys
 import threading
 import traceback
+import logging
 
+LOG = logging.getLogger("root")
 # Constants
 bootstrap_servers = '127.0.0.1:9092'
 kafka_conf = {"bootstrap.servers": bootstrap_servers}
@@ -28,13 +27,13 @@ class ApplicationState:
 
 def wait_for_threads_to_join(app_state):
     app_state.pub_thread.join()
-    print("Publisher completed....")
+    # print("Publisher completed....")
     for t_con in app_state.con_threads:
         t_con.join()
 
 
 def add_neighbors_for_ring_topology(consumers, partition_count):
-    print("Using ring topology")
+    LOG.debug("Using ring topology")
     # Ring topology
     for i in range(1, partition_count):
         consumers[i - 1].set_neighbors([consumers[i].model])
@@ -42,7 +41,7 @@ def add_neighbors_for_ring_topology(consumers, partition_count):
 
 
 def add_neighbors_for_fully_connected_topology(consumers, partition_count):
-    print("Using fully-connected topology")
+    LOG.debug("Using fully-connected topology")
     # Fully-connected topology
     for i in range(0, partition_count):
         neighbors = []
@@ -56,22 +55,21 @@ def start_publisher_and_consumers(topic,
                                   partition_count,
                                   dataset_location,
                                   application_state,
-                                  topology=None):
+                                  topology=None,
+                                  step=50,
+                                  end=None):
     try:
-        publisher = TopicPublisher(topic, partition_count, dataset_location, kafka_conf)
+        publisher = TopicPublisher(topic, partition_count, dataset_location, kafka_conf, step)
         publisher.init_kafka_env()
 
         t_pub = threading.Thread(target=publisher.publish())
-        print("Starting publisher...")
-        t_pub.start()
-        print("Starting consumers...")
 
         consumers = []
         t_consumers = []
         # partition numbers start with 0
 
         for i in range(0, partition_count):
-            con = TopicConsumer("test-group-{0}".format(i + 1), topic, i, bootstrap_servers)
+            con = TopicConsumer("test-group-{0}".format(i + 1), topic, i, bootstrap_servers, step, end)
             consumers.append(con)
 
         if topology == "ring":
@@ -79,8 +77,11 @@ def start_publisher_and_consumers(topic,
         elif topology == "fcg":
             add_neighbors_for_fully_connected_topology(consumers, partition_count)
         else:
-            print("No topology configured")
+            LOG.info("No topology configured")
 
+        # print("Starting publisher...")
+        t_pub.start()
+        # print("Starting consumers...")
         for i in range(0, partition_count):
             t_con = threading.Thread(target=consumers[i].consume)
             t_con.start()

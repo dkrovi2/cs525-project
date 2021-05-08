@@ -8,6 +8,7 @@ class SynchronousSGD(optim.Optimizer):
         super().__init__(lr)
         if neighbors is None:
             neighbors = []
+        self.current_weights = None
         self.current_gradients = None
         # Each neighbor is an instance of OnlineModel
         self.neighbors = neighbors
@@ -15,41 +16,48 @@ class SynchronousSGD(optim.Optimizer):
     def set_neighbors(self, neighbors):
         self.neighbors = neighbors
 
+    def get_current_weights(self):
+        return self.current_weights
+
     def get_current_gradients(self):
         return self.current_gradients
 
-    def _step(self, w, g):
-        all_g = []
-        resultant_g = g
-        # If there are neighbors, get the gradients from the neighbors and
-        # append them to the list.
-        if self.neighbors:
-            # Get the weights from each neighbor and perform the "consolidation"
-            for neighbor in self.neighbors:
-                each_g = neighbor.get_current_gradients()
-                if each_g:
-                    all_g.append(each_g)
-                    for key in each_g.keys():
-                        if key in resultant_g:
-                            resultant_g[key] += each_g[key]
-                        else:
-                            resultant_g[key] = each_g[key]
-
-            for key in resultant_g.keys():
-                resultant_g[key] /= len(self.neighbors)
-
-        # print("{}".format(all_g))
-        # print("{}".format(resultant_g))
-        resultant_g = g
-
-        if isinstance(w, utils.VectorDict) and isinstance(resultant_g, utils.VectorDict):
-            w -= self.learning_rate * resultant_g
-        elif isinstance(w, np.ndarray) and isinstance(resultant_g, np.ndarray):
-            w -= self.learning_rate * resultant_g
+    def _internal_step(self, w, g):
+        if isinstance(w, utils.VectorDict) and isinstance(g, utils.VectorDict):
+            w -= self.learning_rate * g
+        elif isinstance(w, np.ndarray) and isinstance(g, np.ndarray):
+            w -= self.learning_rate * g
         else:
-            for i, gi in resultant_g.items():
+            for i, gi in g.items():
                 w[i] -= self.learning_rate * gi
 
-        self.current_gradients = resultant_g
+        return w
+
+    def _step(self, w, g):
+        if not self.neighbors:
+            w = self._internal_step(w, g)
+            self.current_weights = w
+            self.current_gradients = g
+            return w
+
+        # w(t+1) = sum(w(t) - lr*g(t))
+        # Get the weights from each neighbor and perform the "consolidation"
+        resultant_w = None
+        for neighbor in self.neighbors:
+            each_w = neighbor.get_current_weights()
+            each_g = neighbor.get_current_gradients()
+            if each_g and each_w:
+                each_w_t1 = self._internal_step(each_w, each_g)
+                if resultant_w:
+                    resultant_w += each_w_t1
+                else:
+                    resultant_w = each_w_t1
+
+        self._internal_step(w, g)
+        if resultant_w:
+            w += resultant_w
+
+        self.current_gradients = g
+        self.current_weights = w
         return w
 
