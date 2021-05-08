@@ -11,6 +11,7 @@ confluent-kafka = "^1.6.1"
 fastapi = "^0.63.0"
 river = {git = "https://github.com/online-ml/river.git"}
 sklearn = "^0.0"
+uvicorn ="^0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
