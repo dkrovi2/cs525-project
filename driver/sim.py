@@ -11,7 +11,7 @@ LOG = logging.getLogger("root")
 LOG.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
-formatter = logging.Formatter('[%(asctime)s %(levelname)s]: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+formatter = logging.Formatter('[%(asctime)s (%(threadName)-9s) %(levelname)s]: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 ch.setFormatter(formatter)
 LOG.addHandler(ch)
 
@@ -44,15 +44,17 @@ def main():
             LOG.setLevel(logging.DEBUG)
             ch.setLevel(logging.DEBUG)
         LOG.info("Arguments: {}".format(json.dumps(args.__dict__)))
-        application_state = ApplicationState()
+        app_state = ApplicationState()
         start_publisher_and_consumers(args.topic,
                                       args.partition,
                                       args.dataset_location,
-                                      application_state,
+                                      app_state,
                                       args.graph_type,
                                       args.step,
                                       args.end)
-        wait_for_threads_to_join(application_state)
+        wait_for_threads_to_join(app_state)
+        for con in app_state.consumers:
+            print(con.get_result())
     except Exception as e:
         print(e)
         parser.print_help()

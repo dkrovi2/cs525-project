@@ -1,13 +1,18 @@
 from river import optim
 from river import utils
 import numpy as np
+import copy
+import logging
+
+LOG = logging.getLogger("root")
 
 
 class SynchronousSGD(optim.Optimizer):
-    def __init__(self, lr=0.01, neighbors=None):
+    def __init__(self, lr=0.01, model_name=None, neighbors=None):
         super().__init__(lr)
         if neighbors is None:
             neighbors = []
+        self.model_name = model_name
         self.current_weights = None
         self.current_gradients = None
         # Each neighbor is an instance of OnlineModel
@@ -44,20 +49,26 @@ class SynchronousSGD(optim.Optimizer):
         # Get the weights from each neighbor and perform the "consolidation"
         resultant_w = None
         for neighbor in self.neighbors:
-            each_w = neighbor.get_current_weights()
-            each_g = neighbor.get_current_gradients()
-            if each_g and each_w:
-                each_w_t1 = self._internal_step(each_w, each_g)
+            each_w = copy.deepcopy(neighbor.get_current_weights())
+            each_g = copy.deepcopy(neighbor.get_current_gradients())
+            if each_g is not None and each_w is not None:
+                LOG.debug("[{}] each_g: {}, each_w: {}".format(neighbor.get_name(), each_g, each_w))
+                self._internal_step(each_w, each_g)
                 if resultant_w:
-                    resultant_w += each_w_t1
+                    resultant_w += each_w
                 else:
-                    resultant_w = each_w_t1
+                    resultant_w = each_w
+            else:
+                LOG.debug("[{}] each_g: {}, each_w: {}".format(neighbor.get_name(), each_g, each_w))
 
         self._internal_step(w, g)
         if resultant_w:
             w += resultant_w
 
-        self.current_gradients = g
-        self.current_weights = w
+        self.current_gradients = copy.deepcopy(g)
+        self.current_weights = copy.deepcopy(w)
+        LOG.debug("[{}] g: {}, w: {}".format(self.model_name,
+                                             self.current_gradients,
+                                             self.current_weights))
         return w
 

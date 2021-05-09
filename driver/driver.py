@@ -63,13 +63,14 @@ def start_publisher_and_consumers(topic,
         publisher.init_kafka_env()
 
         t_pub = threading.Thread(target=publisher.publish())
+        t_pub.name = 'publisher'
 
         consumers = []
         t_consumers = []
         # partition numbers start with 0
 
         for i in range(0, partition_count):
-            con = TopicConsumer("test-group-{0}".format(i + 1), topic, i, bootstrap_servers, step, end)
+            con = TopicConsumer("test-group-{}".format(i + 1), topic, i, bootstrap_servers, step, end, i + 1, partition_count, topology)
             consumers.append(con)
 
         if topology == "ring":
@@ -84,6 +85,7 @@ def start_publisher_and_consumers(topic,
         # print("Starting consumers...")
         for i in range(0, partition_count):
             t_con = threading.Thread(target=consumers[i].consume)
+            t_con.name = consumers[i].get_group_id()
             t_con.start()
             t_consumers.append(t_con)
 

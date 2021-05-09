@@ -12,17 +12,29 @@ LOG = logging.getLogger("root")
 
 
 class TopicConsumer:
-    def __init__(self, group_id, topic, partition, bootstrap_servers, step, end):
-        self.model = OnlineModel(step)
+    def __init__(self, group_id, topic, partition, bootstrap_servers, step, end, worker_id, worker_count, topology):
+        self.model = OnlineModel(step, group_id)
         self.group_id = group_id
         self.topic = topic
         self.partition = partition
         self.bootstrap_servers = bootstrap_servers
         self.stop = False
         self.end = int(end)
+        self.worker_count = worker_count
+        self.worker_id = worker_id
+        self.topology = topology
+
+    def get_group_id(self):
+        return self.group_id
 
     def set_neighbors(self, neighbors):
         self.model.set_neighbors(neighbors)
+
+    def get_result(self):
+        metric_log = ""
+        for metric in self.model.metrics:
+            metric_log = metric_log + str(metric.get()) + " | "
+        return "{} | {} | {} | {}".format(self.worker_count,self.worker_id,self.topology,metric_log.strip())
 
     def consume(self):
         consumer_kafka_conf = {"bootstrap.servers": self.bootstrap_servers,

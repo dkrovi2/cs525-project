@@ -2,9 +2,7 @@ from river import compose
 from river import linear_model
 from river import metrics
 from river import preprocessing
-# from dol_optim.trad_sgd import TraditionalSGD
 from dol_optim.sync_sgd import SynchronousSGD
-from river.optim import SGD
 
 import json
 import logging
@@ -13,9 +11,9 @@ LOG = logging.getLogger("root")
 
 
 class OnlineModel:
-    def __init__(self, step):
-        self.optimizer = SynchronousSGD(0.01, None)
-        # self.optimizer = SGD(0.01)
+    def __init__(self, step, name):
+        self.name = name
+        self.optimizer = SynchronousSGD(0.01, name, None)
         self.model = compose.Pipeline(
             preprocessing.StandardScaler(),
             linear_model.LogisticRegression(self.optimizer))
@@ -25,6 +23,9 @@ class OnlineModel:
             self.step = 50
         else:
             self.step = int(step)
+
+    def get_name(self):
+        return self.name
 
     def set_neighbors(self, neighbors):
         self.optimizer.set_neighbors(neighbors)
@@ -37,6 +38,9 @@ class OnlineModel:
         # Assuming that optimizer is an instance of SynchronousSGD
         return self.optimizer.current_weights
 
+    def get_current_metrics(self):
+        return self.metrics
+
     def train(self, message, group):
         self.count = self.count + 1
         record = json.loads(message.strip())
@@ -45,9 +49,4 @@ class OnlineModel:
         for metric in self.metrics:
             metric.update(y, y_pred)
         self.model = self.model.learn_one(x, y)
-        if self.count % self.step == 0:
-            metric_log = ""
-            for metric in self.metrics:
-                metric_log = metric_log + str(metric) + " | "
-            LOG.info("[{0}-{1}] {2}".format(group, self.count, metric_log.strip()))
 
