@@ -52,17 +52,14 @@ class SynchronousSGD(optim.Optimizer):
             each_w = copy.deepcopy(neighbor.get_current_weights())
             each_g = copy.deepcopy(neighbor.get_current_gradients())
             if each_g is not None and each_w is not None:
-                LOG.debug("[{}] each_g: {}, each_w: {}".format(neighbor.get_name(), each_g, each_w))
-                self._internal_step(each_w, each_g)
-                if resultant_w:
+                each_w = self._internal_step(each_w, each_g)
+                if resultant_w is not None:
                     resultant_w += each_w
                 else:
                     resultant_w = each_w
-            else:
-                LOG.debug("[{}] each_g: {}, each_w: {}".format(neighbor.get_name(), each_g, each_w))
 
         self._internal_step(w, g)
-        if resultant_w:
+        if resultant_w is not None:
             w += resultant_w
 
         self.current_gradients = copy.deepcopy(g)
