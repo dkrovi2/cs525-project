@@ -1,0 +1,237 @@
+Script started on Sun May  9 12:05:14 2021
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+]7;file://Sarmas-iMac/Users/krovi/ms-cs/cs-525/cs525-project/driver[?1034h[ [32mkrovi[m@[35mSarmas-iMac[m [33mSun May 09[m [33m12:05:15[m [32m~/ms-cs/cs-525/cs525-project/driver[m [35m[main][m ] [32m$[m poetry shell
+Virtual environment already activated: [34m/Users/krovi/Library/Caches/pypoetry/virtualenvs/driver-6CeYJRlc-py3.7[0m
+]7;file://Sarmas-iMac/Users/krovi/ms-cs/cs-525/cs525-project/driver[ [32mkrovi[m@[35mSarmas-iMac[m [33mSun May 09[m [33m12:05:22[m [32m~/ms-cs/cs-525/cs525-project/driver[m [35m[main][m ] [32m$[m source /Users/krovi/Library/Caches /pypoetry/virtualenvs/driver-6CeYJRlc-py3.7/bin/activate
+]7;file://Sarmas-iMac/Users/krovi/ms-cs/cs-525/cs525-project/driver(driver-6CeYJRlc-py3.7) [ [32mkrovi[m@[35mSarmas-iMac[m [33mSun May 09[m [33m12:05:32[m [32m~/ms-cs/cs-525/cs525-project/driver[m [35m[main][m ] [32m$[m sh run.sh
+[2021-05-09 12:05:49 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 4, "topic": "test-topic-20210509-ring-4", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": "ring", "step": 10000, "end": 10000, "verbose": false}
+[2021-05-09 12:05:49 (MainThread) INFO]: test-topic-20210509-ring-4 topic does not exist. Creating...
+[2021-05-09 12:05:50 (MainThread) INFO]: Topic test-topic-20210509-ring-4 created
+[2021-05-09 12:05:50 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions)}
+[2021-05-09 12:06:55 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:07:59 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:09:03 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:10:07 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:11:14 (MainThread) INFO]: 50000 records streamed so far ....
+4 | 1 | ring | 0.6205 | 0.3794999999999992 | 0.6160357132504569 | 0.7366432811656772 | 0.292166095890411 |
+4 | 2 | ring | 0.6732 | 0.32680000000000087 | 0.5716642371182589 | 0.6565809379727685 | 0.423828125 |
+4 | 3 | ring | 0.6597 | 0.3403000000000003 | 0.5833523806414098 | 0.731823164048228 | 0.4287243150684932 |
+4 | 4 | ring | 0.6913 | 0.30870000000000036 | 0.5556077753235643 | 0.6586977036804026 | 0.51123046875 |
+[2021-05-09 12:11:33 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 8, "topic": "test-topic-20210509-none-8", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": null, "step": 10000, "end": 6250, "verbose": false}
+[2021-05-09 12:11:33 (MainThread) INFO]: test-topic-20210509-none-8 topic does not exist. Creating...
+[2021-05-09 12:11:34 (MainThread) INFO]: Topic test-topic-20210509-none-8 created
+[2021-05-09 12:11:34 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions)}
+[2021-05-09 12:11:53 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:12:13 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:12:44 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:13:49 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:14:57 (MainThread) INFO]: 50000 records streamed so far ....
+[2021-05-09 12:14:57 (MainThread) INFO]: No topology configured
+8 | 1 | None | 0.90512 | 0.09487999999999976 | 0.3080259729308549 | 0.8929415737926376 | 0.9054794520547945 |
+8 | 2 | None | 0.90048 | 0.09952000000000018 | 0.31546790645008593 | 0.8752904725019365 | 0.8828125 |
+8 | 3 | None | 0.90624 | 0.09375999999999994 | 0.3062025473440741 | 0.8924008069939475 | 0.9089041095890411 |
+8 | 4 | None | 0.90048 | 0.09952000000000007 | 0.31546790645008577 | 0.8741312741312741 | 0.884375 |
+8 | 5 | None | 0.90512 | 0.09487999999999985 | 0.30802597293085504 | 0.8918827888177837 | 0.9068493150684932 |
+8 | 6 | None | 0.9008 | 0.09920000000000011 | 0.3149603149604726 | 0.877431906614786 | 0.880859375 |
+8 | 7 | None | 0.9064 | 0.09360000000000003 | 0.30594117081556715 | 0.8942924687605539 | 0.9068493150684932 |
+8 | 8 | None | 0.90176 | 0.0982399999999999 | 0.31343260838655557 | 0.8785992217898833 | 0.88203125 |
+[2021-05-09 12:15:08 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 8, "topic": "test-topic-20210509-fcg-8", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": "fcg", "step": 10000, "end": 6250, "verbose": false}
+[2021-05-09 12:15:08 (MainThread) INFO]: test-topic-20210509-fcg-8 topic does not exist. Creating...
+[2021-05-09 12:15:09 (MainThread) INFO]: Topic test-topic-20210509-fcg-8 created
+[2021-05-09 12:15:09 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-fcg-8': TopicMetadata(test-topic-20210509-fcg-8, 8 partitions)}
+[2021-05-09 12:15:32 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:15:56 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:16:21 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:16:46 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:17:10 (MainThread) INFO]: 50000 records streamed so far ....
+8 | 1 | fcg | 0.5472 | 0.45279999999999976 | 0.6729041536504287 | 0.8 | 0.0410958904109589 |
+8 | 2 | fcg | 0.6008 | 0.399200000000001 | 0.6318227599572533 | 0.6756756756756757 | 0.048828125 |
+8 | 3 | fcg | 0.56944 | 0.43056000000000105 | 0.6561707094956319 | 0.800524934383202 | 0.10445205479452055 |
+8 | 4 | fcg | 0.61424 | 0.3857599999999993 | 0.6210958058142072 | 0.7577854671280276 | 0.085546875 |
+8 | 5 | fcg | 0.56384 | 0.4361599999999993 | 0.6604241061620929 | 0.8344827586206897 | 0.08287671232876713 |
+8 | 6 | fcg | 0.61136 | 0.3886399999999994 | 0.6234099774626641 | 0.73992673992674 | 0.07890625 |
+8 | 7 | fcg | 0.5656 | 0.4344000000000008 | 0.6590902821313639 | 0.8338762214983714 | 0.08767123287671233 |
+8 | 8 | fcg | 0.6168 | 0.38320000000000104 | 0.6190315016216873 | 0.7522935779816514 | 0.09609375 |
+[2021-05-09 12:18:00 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 8, "topic": "test-topic-20210509-ring-8", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": "ring", "step": 10000, "end": 10000, "verbose": false}
+[2021-05-09 12:18:00 (MainThread) INFO]: test-topic-20210509-ring-8 topic does not exist. Creating...
+[2021-05-09 12:18:01 (MainThread) INFO]: Topic test-topic-20210509-ring-8 created
+[2021-05-09 12:18:01 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-ring-8': TopicMetadata(test-topic-20210509-ring-8, 8 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-fcg-8': TopicMetadata(test-topic-20210509-fcg-8, 8 partitions)}
+[2021-05-09 12:18:20 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:18:40 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:19:00 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:19:24 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:19:48 (MainThread) INFO]: 50000 records streamed so far ....
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-3| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578026.004|REQTMOUT|rdkafka#consumer-3| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-5| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578026.004|REQTMOUT|rdkafka#consumer-5| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-6| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578026.004|REQTMOUT|rdkafka#consumer-6| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%3|1620578026.004|FAIL|rdkafka#consumer-6| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 837071ms in state UP)
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-7| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578026.009|REQTMOUT|rdkafka#consumer-7| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%3|1620578026.009|FAIL|rdkafka#consumer-7| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 837081ms in state UP)
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-8| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578026.012|REQTMOUT|rdkafka#consumer-8| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%3|1620578026.012|FAIL|rdkafka#consumer-8| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 837087ms in state UP)
+%3|1620578026.004|FAIL|rdkafka#consumer-5| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 837075ms in state UP)
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-9| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578033.543|REQTMOUT|rdkafka#consumer-9| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%3|1620578033.543|FAIL|rdkafka#consumer-9| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 844618ms in state UP)
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-10| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578033.543|REQTMOUT|rdkafka#consumer-10| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%5|1620578026.004|REQTMOUT|rdkafka#consumer-4| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out FetchRequest in flight (after 383751ms, timeout #0)
+%4|1620578033.543|REQTMOUT|rdkafka#consumer-4| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: Timed out 1 in-flight, 0 retry-queued, 0 out-queue, 0 partially-sent requests
+%3|1620578033.543|FAIL|rdkafka#consumer-10| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 844617ms in state UP)
+%3|1620578033.543|FAIL|rdkafka#consumer-4| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 844616ms in state UP)
+%3|1620578026.004|FAIL|rdkafka#consumer-3| [thrd:sarmas-imac:9092/0]: sarmas-imac:9092/0: 1 request(s) timed out: disconnect (after 837074ms in state UP)
+Exception in thread test-group-6:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-2:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-1:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-4:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-3:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-7:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-8:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+Exception in thread test-group-5:
+Traceback (most recent call last):
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/python3.7/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/krovi/ms-cs/cs-525/cs525-project/driver/appl/kafka_interface.py", line 60, in consume
+    raise KafkaException(msg.error())
+cimpl.KafkaException: KafkaError{code=_TIMED_OUT_QUEUE,val=-166,str="FindCoordinator response error: Local: Timed out in queue"}
+
+8 | 1 | ring | 0.89488 | 0.10511999999999981 | 0.3242221460665508 | 0.8757887744935238 | 0.9030821917808219 |
+8 | 2 | ring | 0.8792 | 0.12080000000000034 | 0.3475629439396558 | 0.8102440701271915 | 0.920703125 |
+8 | 3 | ring | 0.89504 | 0.10496000000000004 | 0.3239753077010655 | 0.8740912095175148 | 0.9058219178082192 |
+8 | 4 | ring | 0.88096 | 0.11903999999999967 | 0.3450217384455647 | 0.81353591160221 | 0.9203125 |
+8 | 5 | ring | 0.89504 | 0.10496000000000004 | 0.3239753077010655 | 0.8770819453697535 | 0.9017123287671233 |
+8 | 6 | ring | 0.87856 | 0.12144000000000021 | 0.34848242423399234 | 0.8134354333449356 | 0.912890625 |
+8 | 7 | ring | 0.89408 | 0.1059199999999999 | 0.3254535297089277 | 0.8770875083500334 | 0.8993150684931507 |
+8 | 8 | ring | 0.88032 | 0.11967999999999993 | 0.34594797296703433 | 0.8117687543014452 | 0.921484375 |
+[2021-05-09 12:34:10 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 10, "topic": "test-topic-20210509-none-10", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": null, "step": 10000, "end": 5000, "verbose": false}
+[2021-05-09 12:34:10 (MainThread) INFO]: test-topic-20210509-none-10 topic does not exist. Creating...
+[2021-05-09 12:34:12 (MainThread) INFO]: Topic test-topic-20210509-none-10 created
+[2021-05-09 12:34:12 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), 'test-topic-20210509-none-10': TopicMetadata(test-topic-20210509-none-10, 10 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-ring-8': TopicMetadata(test-topic-20210509-ring-8, 8 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-fcg-8': TopicMetadata(test-topic-20210509-fcg-8, 8 partitions)}
+[2021-05-09 12:34:31 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:34:48 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:35:09 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:35:31 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:35:54 (MainThread) INFO]: 50000 records streamed so far ....
+[2021-05-09 12:35:54 (MainThread) INFO]: No topology configured
+10 | 1 | None | 0.931 | 0.06900000000000013 | 0.2626785107312742 | 0.9224253232278199 | 0.9236607142857143 |
+10 | 2 | None | 0.9022 | 0.09780000000000001 | 0.3127299154222378 | 0.8779097387173397 | 0.8884615384615384 |
+10 | 3 | None | 0.9228 | 0.07720000000000007 | 0.27784887978899625 | 0.9081875993640699 | 0.9364754098360656 |
+10 | 4 | None | 0.8852 | 0.11480000000000014 | 0.3388214869219485 | 0.8406889128094726 | 0.8489130434782609 |
+10 | 5 | None | 0.9172 | 0.08280000000000001 | 0.28774989139876317 | 0.8795362903225806 | 0.9088541666666666 |
+10 | 6 | None | 0.9254 | 0.07459999999999983 | 0.27313000567495294 | 0.9321518987341773 | 0.8850961538461538 |
+10 | 7 | None | 0.9558 | 0.04419999999999992 | 0.2102379604162862 | 0.9653994019649722 | 0.9416666666666667 |
+10 | 8 | None | 0.8912 | 0.10880000000000015 | 0.32984845004941304 | 0.8770883054892601 | 0.9036885245901639 |
+10 | 9 | None | 0.9082 | 0.09179999999999985 | 0.3029851481508621 | 0.9039650782102583 | 0.9272388059701493 |
+10 | 10 | None | 0.9268 | 0.07319999999999995 | 0.27055498516937354 | 0.8992204899777283 | 0.8972222222222223 |
+[2021-05-09 12:36:04 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 10, "topic": "test-topic-20210509-fcg-10", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": "fcg", "step": 10000, "end": 5000, "verbose": false}
+[2021-05-09 12:36:04 (MainThread) INFO]: test-topic-20210509-fcg-10 topic does not exist. Creating...
+[2021-05-09 12:36:05 (MainThread) INFO]: Topic test-topic-20210509-fcg-10 created
+[2021-05-09 12:36:05 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), 'test-topic-20210509-none-10': TopicMetadata(test-topic-20210509-none-10, 10 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-ring-8': TopicMetadata(test-topic-20210509-ring-8, 8 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-fcg-8': TopicMetadata(test-topic-20210509-fcg-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-10': TopicMetadata(test-topic-20210509-fcg-10, 10 partitions)}
+[2021-05-09 12:36:23 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:36:40 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:37:03 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:37:25 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:37:47 (MainThread) INFO]: 50000 records streamed so far ....
+10 | 1 | fcg | 0.572 | 0.42800000000000055 | 0.6542170893518454 | 0.8378378378378378 | 0.055357142857142855 |
+10 | 2 | fcg | 0.5988 | 0.40119999999999983 | 0.6334035048845245 | 0.8032786885245902 | 0.047115384615384615 |
+10 | 3 | fcg | 0.533 | 0.46699999999999897 | 0.6833739825307947 | 0.9069767441860465 | 0.04795081967213115 |
+10 | 4 | fcg | 0.6476 | 0.3524000000000009 | 0.593632883186234 | 0.756578947368421 | 0.0625 |
+10 | 5 | fcg | 0.6434 | 0.35659999999999986 | 0.5971599450733446 | 0.8044444444444444 | 0.09427083333333333 |
+10 | 6 | fcg | 0.6124 | 0.38760000000000094 | 0.622575296650936 | 0.8901098901098901 | 0.07788461538461539 |
+10 | 7 | fcg | 0.5624 | 0.43759999999999954 | 0.6615134163416487 | 0.8605442176870748 | 0.10541666666666667 |
+10 | 8 | fcg | 0.5396 | 0.4603999999999995 | 0.6785278181474946 | 0.8317307692307693 | 0.0709016393442623 |
+10 | 9 | fcg | 0.4916 | 0.5084000000000004 | 0.7130217387990357 | 0.845 | 0.06305970149253731 |
+10 | 10 | fcg | 0.658 | 0.3420000000000013 | 0.584807660688539 | 0.8 | 0.06666666666666667 |
+[2021-05-09 12:38:41 (MainThread) INFO]: Arguments: {"group_id": "", "partition": 10, "topic": "test-topic-20210509-ring-10", "dataset_location": "../../data/phishing-dataset.txt", "graph_type": "ring", "step": 10000, "end": 5000, "verbose": false}
+[2021-05-09 12:38:41 (MainThread) INFO]: test-topic-20210509-ring-10 topic does not exist. Creating...
+[2021-05-09 12:38:42 (MainThread) INFO]: Topic test-topic-20210509-ring-10 created
+[2021-05-09 12:38:42 (MainThread) INFO]: {'test-topic-20210509-fcg-2': TopicMetadata(test-topic-20210509-fcg-2, 2 partitions), 'test-topic-20210509-none-4': TopicMetadata(test-topic-20210509-none-4, 4 partitions), 'test-topic-20210509-ring-10': TopicMetadata(test-topic-20210509-ring-10, 10 partitions), 'test-topic-20210509-ring-4': TopicMetadata(test-topic-20210509-ring-4, 4 partitions), 'test-topic-20210509-none-10': TopicMetadata(test-topic-20210509-none-10, 10 partitions), '__consumer_offsets': TopicMetadata(__consumer_offsets, 50 partitions), 'test-topic-20210509-fcg-4': TopicMetadata(test-topic-20210509-fcg-4, 4 partitions), 'test-topic-20210509-none-8': TopicMetadata(test-topic-20210509-none-8, 8 partitions), 'test-topic-20210509-fcg-1': TopicMetadata(test-topic-20210509-fcg-1, 1 partitions), 'test-topic-20210509-ring-2': TopicMetadata(test-topic-20210509-ring-2, 2 partitions), 'test-topic-20210509-ring-8': TopicMetadata(test-topic-20210509-ring-8, 8 partitions), 'test-topic-20210509-none-1': TopicMetadata(test-topic-20210509-none-1, 1 partitions), 'test-topic-20210509-ring-1': TopicMetadata(test-topic-20210509-ring-1, 1 partitions), 'test-topic-20210509-fcg-8': TopicMetadata(test-topic-20210509-fcg-8, 8 partitions), 'test-topic-20210509-none-2': TopicMetadata(test-topic-20210509-none-2, 2 partitions), 'test-topic-20210509-fcg-10': TopicMetadata(test-topic-20210509-fcg-10, 10 partitions)}
+[2021-05-09 12:38:59 (MainThread) INFO]: 10000 records streamed so far ....
+[2021-05-09 12:39:15 (MainThread) INFO]: 20000 records streamed so far ....
+[2021-05-09 12:39:32 (MainThread) INFO]: 30000 records streamed so far ....
+[2021-05-09 12:39:49 (MainThread) INFO]: 40000 records streamed so far ....
+[2021-05-09 12:40:05 (MainThread) INFO]: 50000 records streamed so far ....
+10 | 1 | ring | 0.918 | 0.08199999999999982 | 0.28635642126552674 | 0.8815679733110926 | 0.94375 |
+10 | 2 | ring | 0.8788 | 0.12120000000000007 | 0.3481379037105843 | 0.8088851634534786 | 0.9278846153846154 |
+10 | 3 | ring | 0.8752 | 0.12479999999999997 | 0.3532704346531138 | 0.8703099510603589 | 0.8745901639344262 |
+10 | 4 | ring | 0.841 | 0.15900000000000042 | 0.3987480407475382 | 0.7278674225904928 | 0.9070652173913043 |
+10 | 5 | ring | 0.8528 | 0.14719999999999975 | 0.3836665218650172 | 0.7470784641068448 | 0.9322916666666666 |
+10 | 6 | ring | 0.8818 | 0.11820000000000007 | 0.3438022687534218 | 0.8304482911673324 | 0.8995192307692308 |
+10 | 7 | ring | 0.889 | 0.11099999999999999 | 0.3331666249791536 | 0.8794734677087618 | 0.8908333333333334 |
+10 | 8 | ring | 0.869 | 0.13099999999999964 | 0.3619392214170767 | 0.8534653465346534 | 0.8831967213114754 |
+10 | 9 | ring | 0.859 | 0.14100000000000007 | 0.37549966711037186 | 0.8898539281484406 | 0.841044776119403 |
+10 | 10 | ring | 0.8828 | 0.11719999999999973 | 0.3423448553724734 | 0.7844423617619494 | 0.93 |
+]7;file://Sarmas-iMac/Users/krovi/ms-cs/cs-525/cs525-project/driver(driver-6CeYJRlc-py3.7) [ [32mkrovi[m@[35mSarmas-iMac[m [33mSun May 09[m [33m12:40:26[m [32m~/ms-cs/cs-525/cs525-project/driver[m [35m[main][m ] [32m$[m 
